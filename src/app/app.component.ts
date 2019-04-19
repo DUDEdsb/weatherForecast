@@ -6,21 +6,41 @@ import { WeatherDataService } from './weather-data.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   ngOnInit() {
 
   }
-  constructor(private dataservice: WeatherDataService){}
-  title = 'WeatherForecast';
-  cityName: string ='';
-  getWeatherData(){
-    // console.log(this.cityName)
+  title: string = "Weather Forecast"
+  constructor(private dataservice: WeatherDataService) { }
+  weatherList: any;
+  weatherCurrData: any;
+  cityName: string;
+  error: boolean = false;
+  getWeatherData() {
+
+    this.weatherList = [];
+    this.dataservice.getCurrentData(this.cityName)
+      .subscribe((currResp)=>{
+        this.weatherCurrData = currResp;
+        // console.log(currResp);
+      }, (err)=>{
+        this.error = true;
+        window.alert("wrong city name")
+      }
+      );
     this.dataservice.getDataFromApi(this.cityName)
-    .subscribe((resp)=>{
-      console.log(resp);
-    });
+      .subscribe((resp)=>{
+        var weatherData:any = resp;
+        // console.log(resp);
+        var i =0;
+        for(let index=0;index<5;index++){
+          this.weatherList.push(weatherData.list[i]);
+          i=i+8;
+        } 
+        console.log(this.weatherList);
+      })
   }
-  newCity(cityName){
+  newCity(cityName: string) {
     this.cityName = cityName;
   }
 }

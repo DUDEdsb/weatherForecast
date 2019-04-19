@@ -1,21 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { InputComponent } from './input/input.component';
 import { WeatherDataService } from './weather-data.service';
-import { OutputComponent } from './output/output.component';
+import { OutputitemComponent } from './outputitem/outputitem.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
-    OutputComponent
+    OutputitemComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbAccordionModule
   ],
   providers: [
     WeatherDataService

@@ -1,0 +1,19 @@
+<div class="card" style="width: 10rem;">
+    <div class="card-img-top">
+        <img class="alert-dark" 
+        src="http://openweathermap.org/img/w/{{weatherData.weather[0].icon}}.png" 
+        alt="Card image cap"
+        height="60"
+        width="60">
+      
+    </div>
+    <hr>
+    <div class="card-body">
+      <h5 class="card-title">{{day}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{weatherData.weather[0].description}}</h6>
+      <ul style="list-style: none;" class="float-left mx-0 px-0">
+        <li>Temp: {{weatherData.main.temp}}°C</li>
+        
+      </ul>
+    </div>
+  </div>

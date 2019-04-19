@@ -5,16 +5,52 @@
   <div class="row">
     <div class="col-3"></div>
     <div class="col-md-6">
-      <app-input
-      (valueChanged) = "newCity($event)"
-      ></app-input>  
-      <button class="btn btn-info form-control mt-2" (click)=getWeatherData()>Show</button>    
+      <app-input (valueChanged)="newCity($event)"></app-input>
+      <button class="btn btn-info form-control mt-2" (click)=getWeatherData()>Show</button>
     </div>
     <div class="col-md-3">
     </div>
   </div>
 </div>
-<div class="container">
-  <app-output></app-output>
+<div class="container d-{{class}}">
+  <hr>
+  <div *ngIf="weatherCurrData">
+   <div class="row">
+      <div class="col-md-4">
+          <div class="card" style="width: 20rem;">
+              <img class="card-img-top" 
+              src="http://openweathermap.org/img/w/{{weatherCurrData.weather[0].icon}}.png" 
+              alt="Card image cap"
+              height="50"
+              width="50">
+              <div class="card-body">
+                <h4 class="card-title">Current Weather in {{weatherCurrData.name}}, {{weatherCurrData.sys.country}}</h4>
+                <hr>
+                <ul style="list-style: none;" class="float-left mx-0 px-0">
+                  <li><b>Cond.:</b> {{weatherCurrData.weather[0].main}}</li>
+                  <li><b>Desc.:</b> {{weatherCurrData.weather[0].description}}</li>
+                  <li><b>Humidity:</b>{{weatherCurrData.main.humidity}} HPA</li>
+                </ul>
+                <ul style="list-style: none" class="float-right mx-0 px-0">
+                  <li><b>Temp: {{weatherCurrData.main.temp}}°C</b></li>
+                  <li><b>Max Temp:</b> {{weatherCurrData.main.temp_max}}°C</li>
+                  <li><b>Min Temp: </b>{{weatherCurrData.main.temp_min}}°C</li>
+                </ul>
+              </div>
+            </div>
+      </div>
+      <div class="col-md-8">
+          <div class = "row">
+            <div class = "col-md-2" *ngFor="let weather of weatherList | slice:1">
+              <app-outputitem 
+                [cityName]=weatherCurrData.name
+                [countryName]=weatherCurrData.sys.country
+                [weatherData]="weather"
+              ></app-outputitem>
+            </div>
+          </div>
+          <h5 class="mx-5 h5">Weather in {{weatherCurrData.name}} for next four days.</h5>
+      </div>
+   </div>
+  </div>
 </div>
-
