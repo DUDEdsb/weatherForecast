@@ -12,12 +12,13 @@ export class AppComponent implements OnInit {
   }
   title: string = "Weather Forecast"
   constructor(private dataservice: WeatherDataService) { }
+  class:string="none";
   weatherList: any;
   weatherCurrData: any;
   cityName: string;
   error: boolean = false;
   getWeatherData() {
-
+    this.class="";
     this.weatherList = [];
     this.dataservice.getCurrentData(this.cityName)
       .subscribe((currResp)=>{
